@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travelling Calculator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #cbd5e1;
+      margin-bottom: 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      font-size: 24px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #cbd5e1;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 11px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      background: rgba(255,255,255,0.12);
+      color: white;
+      font-size: 15px;
+    }
+
+    select option {
+      color: black;
+    }
+
+    .summary-box {
+      background: rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .big {
+      font-size: 28px;
+      font-weight: bold;
+      margin-top: 6px;
+    }
+
+    .mid {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 6px;
+    }
+
+    .small {
+      color: #cbd5e1;
+      font-size: 14px;
+    }
+
+    .result-list div {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .result-list div:last-child {
+      border-bottom: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #06b6d4;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #0891b2;
+    }
+
+    .note {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #cbd5e1;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .row, .row-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">Travelling Calculator</div>
+    <div class="subtitle">Travel cost calculator with transport, hotel, food, shopping, local travel and full detail</div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Trip Details</h2>
+
+        <div class="row">
+          <div>
+            <label>From</label>
+            <input type="text" id="fromCity" value="Nagpur">
+          </div>
+          <div>
+            <label>To</label>
+            <input type="text" id="toCity" value="Goa">
+          </div>
+        </div>
+
+        <div class="row-3">
+          <div>
+            <label>Distance (km)</label>
+            <input type="number" id="distance" value="850">
+          </div>
+          <div>
+            <label>Days</label>
+            <input type="number" id="days" value="4">
+          </div>
+          <div>
+            <label>Travellers</label>
+            <input type="number" id="travellers" value="2">
+          </div>
+        </div>
+
+        <div class="row-3">
+          <div>
+            <label>Travel Mode</label>
+            <select id="mode">
+              <option value="flight">Flight</option>
+              <option value="train" selected>Train</option>
+              <option value="bus">Bus</option>
+              <option value="car">Car</option>
+              <option value="bike">Bike</option>
+            </select>
+          </div>
+          <div>
+            <label>Stay Type</label>
+            <select id="stay">
+              <option value="budget">Budget Stay</option>
+              <option value="standard" selected>Standard Hotel</option>
+              <option value="premium">Premium Hotel</option>
+              <option value="luxury">Luxury Stay</option>
+            </select>
+          </div>
+          <div>
+            <label>Food Plan</label>
+            <select id="food">
+              <option value="low">Budget Food</option>
+              <option value="medium" selected>Balanced Food</option>
+              <option value="high">Premium Dining</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row-3">
+          <div>
+            <label>Activities</label>
+            <input type="number" id="activities" value="3500">
+          </div>
+          <div>
+            <label>Shopping</label>
+            <input type="number" id="shopping" value="2500">
+          </div>
+          <div>
+            <label>Local Transport</label>
+            <input type="number" id="localTransport" value="1800">
+          </div>
+        </div>
+
+        <div class="row-3">
+          <div>
+            <label>Visa</label>
+            <input type="number" id="visa" value="0">
+          </div>
+          <div>
+            <label>Insurance</label>
+            <input type="number" id="insurance" value="600">
+          </div>
+          <div>
+            <label>Miscellaneous</label>
+            <input type="number" id="misc" value="1000">
+          </div>
+        </div>
+
+        <div>
+          <label>Emergency Buffer %</label>
+          <input type="number" id="buffer" value="12">
+        </div>
+
+        <button onclick="calculateTrip()">Calculate Travel Cost</button>
+      </div>
+
+      <div class="card">
+        <h2>Trip Summary</h2>
+
+        <div class="summary-box">
+          <div class="small">Route</div>
+          <div class="mid" id="routeText">Nagpur → Goa</div>
+        </div>
+
+        <div class="summary-box">
+          <div class="small">Total Cost</div>
+          <div class="big" id="totalCost">₹0</div>
+        </div>
+
+        <div class="row">
+          <div class="summary-box">
+            <div class="small">Per Person</div>
+            <div class="mid" id="perPerson">₹0</div>
+          </div>
+          <div class="summary-box">
+            <div class="small">Per Day</div>
+            <div class="mid" id="perDay">₹0</div>
+          </div>
+        </div>
+
+        <div class="result-list" id="breakdown">
+          <div><span>Transport</span><span>₹0</span></div>
+          <div><span>Stay</span><span>₹0</span></div>
+          <div><span>Food</span><span>₹0</span></div>
+          <div><span>Local Travel</span><span>₹0</span></div>
+          <div><span>Activities</span><span>₹0</span></div>
+          <div><span>Shopping</span><span>₹0</span></div>
+          <div><span>Visa</span><span>₹0</span></div>
+          <div><span>Insurance</span><span>₹0</span></div>
+          <div><span>Misc</span><span>₹0</span></div>
+          <div><span>Buffer</span><span>₹0</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      Save this file as <b>index.html</b> and open directly in browser.
+    </div>
+  </div>
+
+  <script>
+    function formatINR(num) {
+      return "₹" + Math.round(num).toLocaleString("en-IN");
+    }
+
+    function calculateTrip() {
+      const fromCity = document.getElementById("fromCity").value;
+      const toCity = document.getElementById("toCity").value;
+      const distance = Number(document.getElementById("distance").value) || 0;
+      const days = Number(document.getElementById("days").value) || 1;
+      const travellers = Number(document.getElementById("travellers").value) || 1;
+      const mode = document.getElementById("mode").value;
+      const stay = document.getElementById("stay").value;
+      const food = document.getElementById("food").value;
+      const activities = Number(document.getElementById("activities").value) || 0;
+      const shopping = Number(document.getElementById("shopping").value) || 0;
+      const localTransport = Number(document.getElementById("localTransport").value) || 0;
+      const visa = Number(document.getElementById("visa").value) || 0;
+      const insurance = Number(document.getElementById("insurance").value) || 0;
+      const misc = Number(document.getElementById("misc").value) || 0;
+      const bufferPercent = Number(document.getElementById("buffer").value) || 0;
+
+      const transportRates = {
+        flight: 6.8,
+        train: 1.4,
+        bus: 1.1,
+        car: 8.5,
+        bike: 2.3
+      };
+
+      const stayRates = {
+        budget: 900,
+        standard: 2200,
+        premium: 5500,
+        luxury: 11000
+      };
+
+      const foodRates = {
+        low: 450,
+        medium: 900,
+        high: 2200
+      };
+
+      const transportCost = distance * transportRates[mode] * travellers;
+      const stayCost = Math.max(days - 1, 1) * stayRates[stay] * Math.max(travellers / 2, 1);
+      const foodCost = days * foodRates[food] * travellers;
+
+      const subtotal = transportCost + stayCost + foodCost + localTransport + activities + shopping + visa + insurance + misc;
+      const bufferAmount = subtotal * bufferPercent / 100;
+      const total = subtotal + bufferAmount;
+      const perPerson = total / travellers;
+      const perDay = total / days;
+
+      document.getElementById("routeText").innerText = fromCity + " → " + toCity;
+      document.getElementById("totalCost").innerText = formatINR(total);
+      document.getElementById("perPerson").innerText = formatINR(perPerson);
+      document.getElementById("perDay").innerText = formatINR(perDay);
+
+      document.getElementById("breakdown").innerHTML = `
+        <div><span>Transport</span><span>${formatINR(transportCost)}</span></div>
+        <div><span>Stay</span><span>${formatINR(stayCost)}</span></div>
+        <div><span>Food</span><span>${formatINR(foodCost)}</span></div>
+        <div><span>Local Travel</span><span>${formatINR(localTransport)}</span></div>
+        <div><span>Activities</span><span>${formatINR(activities)}</span></div>
+        <div><span>Shopping</span><span>${formatINR(shopping)}</span></div>
+        <div><span>Visa</span><span>${formatINR(visa)}</span></div>
+        <div><span>Insurance</span><span>${formatINR(insurance)}</span></div>
+        <div><span>Misc</span><span>${formatINR(misc)}</span></div>
+        <div><span>Buffer</span><span>${formatINR(bufferAmount)}</span></div>
+      `;
+    }
+
+    calculateTrip();
+  </script>
+</body>
+</html>
